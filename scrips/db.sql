@@ -1,7 +1,7 @@
 CREATE DATABASE tiendadeabarrotes;
 USE tiendadeabarrotes;
 
--- Crear la tabla Producto
+-- Tabla Producto
 CREATE TABLE Producto (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     Nombre VARCHAR(100),
@@ -11,7 +11,7 @@ CREATE TABLE Producto (
     Stock INT
 );
 
--- Crear la tabla Cliente
+-- Tabla Cliente
 CREATE TABLE Cliente (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     Nombre VARCHAR(50),
@@ -20,7 +20,7 @@ CREATE TABLE Cliente (
     Direccion VARCHAR(255)
 );
 
--- Crear la tabla Proveedor
+-- Tabla Proveedor
 CREATE TABLE Proveedor (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     Nombre VARCHAR(100),
@@ -28,7 +28,7 @@ CREATE TABLE Proveedor (
     Direccion VARCHAR(255)
 );
 
--- Crear la tabla Empleado
+-- Tabla Empleado
 CREATE TABLE Empleado (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     Nombre VARCHAR(50),
@@ -37,7 +37,7 @@ CREATE TABLE Empleado (
     Salario DECIMAL(10, 2)
 );
 
--- Creacion de la tabla Transaccion_Venta
+-- Tabla Transaccion_Venta
 CREATE TABLE Transaccion_Venta (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     Fecha DATE,
