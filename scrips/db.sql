@@ -6,7 +6,7 @@ CREATE TABLE Producto (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     Nombre VARCHAR(100),
     Descripcion TEXT, O VARCHAR(n) 
-    Precio DECIMAL(10, 2),
+    Precio DECIMAL(10, 3),
     Categoria VARCHAR(50),
     Stock INT
 );
