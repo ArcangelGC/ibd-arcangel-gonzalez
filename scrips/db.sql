@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS tiendadeabarrotes;
 USE tiendadeabarrotes;
 
--- Tabla Producto
+-- Tabla Producto osi
 CREATE TABLE Producto (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     Nombre VARCHAR(100),
