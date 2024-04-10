@@ -1,11 +1,11 @@
-CREATE DATABASE tiendadeabarrotes;
+CREATE DATABASE IF NOT EXISTS tiendadeabarrotes;
 USE tiendadeabarrotes;
 
 -- Tabla Producto
 CREATE TABLE Producto (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     Nombre VARCHAR(100),
-    Descripcion TEXT, O VARCHAR(n) 
+    Descripcion TEXT,
     Precio DECIMAL(10, 3),
     Categoria VARCHAR(50),
     Stock INT
@@ -47,7 +47,7 @@ CREATE TABLE Transaccion_Venta (
     FOREIGN KEY (Cliente_ID) REFERENCES Cliente(ID)
 );
 
--- Crear la tabla Transaccion_Producto (relación muchos a muchos entre Transaccion_Venta y Producto)
+-- Tabla Transaccion_Producto
 CREATE TABLE Transaccion_Producto (
     Transaccion_ID INT,
     Producto_ID INT,
