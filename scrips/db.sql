@@ -56,3 +56,46 @@ CREATE TABLE Transaccion_Producto (
     FOREIGN KEY (Transaccion_ID) REFERENCES Transaccion_Venta(ID),
     FOREIGN KEY (Producto_ID) REFERENCES Producto(ID)
 );
+
+
+-- Inserción de datos en mi tabla Cliente
+INSERT INTO Cliente (Nombre, Apellido, Telefono, Direccion)
+VALUES 
+('Luis Perez', 'Gonzalez', '9534659863', 'Tlaxiaco, Oaxaca'),
+('Maria Gomez', 'Hernandez', '9533769912', 'Oaxaca, Oaxaca'),
+('Pedro Hernandez', 'Lopez', '9535479899', 'Puebla, Puebla');
+
+-- Inserción de datos en mi tabla Empleado
+INSERT INTO Empleado (Nombre, Apellido, Puesto, Salario)
+VALUES 
+('Juan Martinez', 'Garcia', 'Vendedor', 25000),
+('Ana Garcia', 'Martinez', 'Cajero', 20000),
+('Diego Lopez', 'Perez', 'Gerente', 35000);
+
+-- Inserción de datos en mi tabla Producto
+INSERT INTO Producto (Nombre, Descripcion, Precio, Categoria, Stock)
+VALUES 
+('Arroz', 'Arroz blanco, paquete de 1kg', 25.99, 'Granos', 100),
+('Frijoles', 'Frijoles negros, paquete de 500g', 18.50, 'Granos', 80),
+('Aceite', 'Aceite vegetal, botella de 1L', 35.75, 'Aceites', 50);
+
+-- Inserción de datos en mi tabla Proveedor
+INSERT INTO Proveedor (Nombre, Telefono, Direccion)
+VALUES 
+('Distribuidora ABC', '1234567890', 'Calle Principal #123'),
+('Proveedor XYZ', '9876543210', 'Avenida Central #456'),
+('Suministros EFG', '2468101214', 'Boulevard Norte #789');
+
+-- Insercion de datos en mi tabla Transaccion_Venta
+INSERT INTO Transaccion_Venta (Fecha, Cantidad, Precio_total, Cliente_ID)
+VALUES 
+('2024-04-24', 5, 150.75, 1),
+('2024-04-25', 3, 90.50, 2),
+('2024-04-26', 2, 60.25, 3);
+
+-- Insercion de datos en mi tabla de Transaccion_Producto
+INSERT INTO Transaccion_Producto (Transaccion_ID, Producto_ID, Cantidad)
+VALUES 
+(1, 1, 2),
+(2, 2, 1),
+(3, 3, 2);
