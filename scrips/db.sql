@@ -75,7 +75,7 @@ VALUES
 -- Inserción de datos en mi tabla Producto
 INSERT INTO Producto (Nombre, Descripcion, Precio, Categoria, Stock)
 VALUES 
-('Arroz', 'Arroz blanco, paquete de 1kg', 25.99, 'Granos', 100),
+('Arroz', 'Arroz blanco, paquete de 1kg', 25.99, 'Granos', 120),
 ('Frijoles', 'Frijoles negros, paquete de 500g', 18.50, 'Granos', 80),
 ('Aceite', 'Aceite vegetal, botella de 1L', 35.75, 'Aceites', 50);
 
