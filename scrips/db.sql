@@ -99,3 +99,77 @@ VALUES
 (1, 1, 2),
 (2, 2, 1),
 (3, 3, 2);
+
+-- Seleccionar todos los datos de una tabla
+SELECT * FROM Producto;
+
+-- Seleccionar datos específicos de una tabla
+SELECT Nombre, Descripcion FROM Producto;
+
+-- Seleccionar datos filtrados por una condición
+SELECT * FROM Empleado WHERE Salario > 50000;
+
+-- Ordenar resultados en orden ascendente o descendente
+SELECT * FROM Producto ORDER BY Precio DESC;
+
+-- Contar el número de filas en una tabla
+SELECT COUNT(*) FROM Cliente;
+
+-- Sumar valores de una columna
+SELECT SUM(Stock) FROM Producto;
+
+-- Obtener el valor máximo y mínimo de una columna
+SELECT MAX(Salario), MIN(Salario) FROM Empleado;
+
+-- Unir dos tablas usando INNER JOIN
+SELECT Cliente.Nombre, Transaccion_Venta.Fecha
+FROM Cliente
+INNER JOIN Transaccion_Venta ON Cliente.ID = Transaccion_Venta.Cliente_ID;
+
+-- Consulta con JOIN y condiciones adicionales
+SELECT e.Nombre AS empleado, d.Nombre AS departamento
+FROM Empleado e
+JOIN Departamento d ON e.Departamento_ID = d.ID
+WHERE e.Salario > 50000;
+
+-- Consulta con subconsultas correlacionadas
+SELECT e.Nombre AS empleado, e.Salario
+FROM Empleado e
+WHERE e.Salario > (
+    SELECT AVG(Salario) FROM Empleado WHERE Departamento_ID = e.Departamento_ID
+);
+
+-- Consulta con funciones de agregación y GROUP BY
+SELECT Departamento_ID, AVG(Salario) AS salario_promedio
+FROM Empleado
+GROUP BY Departamento_ID;
+
+-- Consulta con funciones de fecha
+SELECT Nombre, Fecha_Contratacion
+FROM Empleado
+WHERE YEAR(Fecha_Contratacion) = 2023;
+
+-- Consulta con UNION para combinar resultados
+SELECT Nombre, 'Empleado' AS tipo
+FROM Empleado
+UNION
+SELECT Nombre, 'Cliente' AS tipo
+FROM Cliente;
+
+-- Consulta con operadores LIKE para búsqueda de texto parcial
+SELECT Nombre, Direccion
+FROM Cliente
+WHERE Direccion LIKE '%Calle%';
+
+-- Consulta con subconsultas y operadores EXISTS o NOT EXISTS
+SELECT Nombre
+FROM Producto
+WHERE EXISTS (
+    SELECT 1 FROM Transaccion_Venta WHERE Producto_ID = Producto.ID
+);
+
+-- Consulta con ordenamiento y paginación
+SELECT Nombre, Salario
+FROM Empleado
+ORDER BY Salario DESC
+OFFSET 10 ROWS FETCH NEXT 10 ROWS ONLY;
