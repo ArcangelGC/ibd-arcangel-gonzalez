@@ -1,5 +1,95 @@
-CREATE DATABASE IF NOT EXISTS tiendadeabarrotes;
-USE tiendadeabarrotes;
+-- Active: 1715192259552@@localhost@3306@abarrotestienda
+CREATE DATABASE IF NOT EXISTS abarrotestienda;
+USE abarrotestienda;
+
+-- Tabla Ciudad
+CREATE TABLE Ciudad (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    Nombre VARCHAR(50),
+    Pais VARCHAR(50)
+);
+
+-- Inserción de datos en mi tabla Ciudad
+INSERT INTO Ciudad (Nombre, Pais)
+VALUES 
+('Lima', 'Peru'),
+('CDMX', 'Mexico');
+
+-- Tabla Direccion
+CREATE TABLE Direccion (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    Calle VARCHAR(255),
+    Ciudad_ID INT,
+    FOREIGN KEY (Ciudad_ID) REFERENCES Ciudad(ID)
+);
+
+-- Inserción de datos en mi tabla Direccion
+INSERT INTO Direccion (Calle, Ciudad_ID)
+VALUES 
+('Calle 1', 1),
+('Calle 2', 2);
+
+-- Tabla Cliente 
+CREATE TABLE Cliente (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    Nombre VARCHAR(50),
+    Apellido VARCHAR(50),
+    Telefono CHAR(13),
+    Direccion_ID INT,
+    FOREIGN KEY (Direccion_ID) REFERENCES Direccion(ID)
+);
+
+-- Inserción de datos en mi tabla Cliente
+INSERT INTO Cliente (Nombre, Apellido, Telefono, Direccion_ID)
+VALUES 
+('Luis Perez', 'Gonzalez', '9534659863', 1),
+('Maria Gomez', 'Hernandez', '9533769912', 2);
+
+-- Tabla Proveedor
+CREATE TABLE Proveedor (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    Nombre VARCHAR(100),
+    Telefono CHAR(13),
+    Direccion_ID INT,
+    FOREIGN KEY (Direccion_ID) REFERENCES Direccion(ID)
+);
+
+-- Inserción de datos en mi tabla Proveedor
+INSERT INTO Proveedor (Nombre, Telefono, Direccion_ID)
+VALUES 
+('Distribuidora ABC', '1234567890', 1),
+('Proveedor XYZ', '9876543210', 2);
+
+-- Tabla Puesto
+CREATE TABLE Puesto (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    Nombre VARCHAR(50)
+);
+
+-- Inserción de datos en la tabla Puesto
+INSERT INTO Puesto (Nombre)
+VALUES 
+('Vendedor'),
+('Cajero'),
+('Gerente');
+
+-- Tabla Empleado
+CREATE TABLE Empleado (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    Nombre VARCHAR(50),
+    Apellido VARCHAR(50),
+    Puesto VARCHAR(50),
+    Salario DECIMAL(10, 2),
+    Puesto_ID INT,
+    FOREIGN KEY (Puesto_ID) REFERENCES Puesto(ID)
+);
+
+-- Inserción de datos en mi tabla Empleado
+INSERT INTO Empleado (Nombre, Apellido, Puesto, Salario, Puesto_ID)
+VALUES 
+('Juan Martinez', 'Garcia', 'Vendedor', 25000, 1),
+('Ana Garcia', 'Martinez', 'Cajero', 20000, 2),
+('Diego Lopez', 'Perez', 'Gerente', 35000, 3);
 
 -- Tabla Producto 
 CREATE TABLE Producto (
@@ -11,31 +101,12 @@ CREATE TABLE Producto (
     Stock INT
 );
 
--- Tabla Cliente 
-CREATE TABLE Cliente (
-    ID INT PRIMARY KEY AUTO_INCREMENT,
-    Nombre VARCHAR(50),
-    Apellido VARCHAR(50),
-    Telefono CHAR(13),
-    Direccion VARCHAR(255)
-);
-
--- Tabla Proveedor
-CREATE TABLE Proveedor (
-    ID INT PRIMARY KEY AUTO_INCREMENT,
-    Nombre VARCHAR(100),
-    Telefono CHAR(13),
-    Direccion VARCHAR(255)
-);
-
--- Tabla Empleado
-CREATE TABLE Empleado (
-    ID INT PRIMARY KEY AUTO_INCREMENT,
-    Nombre VARCHAR(50),
-    Apellido VARCHAR(50),
-    Puesto VARCHAR(50),
-    Salario DECIMAL(10, 2)
-);
+-- Inserción de datos en mi tabla Producto
+INSERT INTO Producto (Nombre, Descripcion, Precio, Categoria, Stock)
+VALUES 
+('Arroz', 'Arroz blanco, paquete de 1kg', 25.99, 'Granos', 120),
+('Frijoles', 'Frijoles negros, paquete de 500g', 18.50, 'Granos', 80),
+('Aceite', 'Aceite vegetal, botella de 1L', 35.75, 'Aceites', 50);
 
 -- Tabla Transaccion_Venta
 CREATE TABLE Transaccion_Venta (
@@ -47,6 +118,12 @@ CREATE TABLE Transaccion_Venta (
     FOREIGN KEY (Cliente_ID) REFERENCES Cliente(ID)
 );
 
+-- Insercion de datos en mi tabla Transaccion_Venta
+INSERT INTO Transaccion_Venta (Fecha, Cantidad, Precio_total, Cliente_ID)
+VALUES 
+('2024-04-24', 5, 150.75, 1),
+('2024-04-25', 3, 90.50, 2);
+
 -- Tabla Transaccion_Producto
 CREATE TABLE Transaccion_Producto (
     Transaccion_ID INT,
@@ -57,48 +134,11 @@ CREATE TABLE Transaccion_Producto (
     FOREIGN KEY (Producto_ID) REFERENCES Producto(ID)
 );
 
-
--- Inserción de datos en mi tabla Cliente
-INSERT INTO Cliente (Nombre, Apellido, Telefono, Direccion)
-VALUES 
-('Luis Perez', 'Gonzalez', '9534659863', 'Tlaxiaco, Oaxaca'),
-('Maria Gomez', 'Hernandez', '9533769912', 'Oaxaca, Oaxaca'),
-('Pedro Hernandez', 'Lopez', '9535479899', 'Puebla, Puebla');
-
--- Inserción de datos en mi tabla Empleado
-INSERT INTO Empleado (Nombre, Apellido, Puesto, Salario)
-VALUES 
-('Juan Martinez', 'Garcia', 'Vendedor', 25000),
-('Ana Garcia', 'Martinez', 'Cajero', 20000),
-('Diego Lopez', 'Perez', 'Gerente', 35000);
-
--- Inserción de datos en mi tabla Producto
-INSERT INTO Producto (Nombre, Descripcion, Precio, Categoria, Stock)
-VALUES 
-('Arroz', 'Arroz blanco, paquete de 1kg', 25.99, 'Granos', 120),
-('Frijoles', 'Frijoles negros, paquete de 500g', 18.50, 'Granos', 80),
-('Aceite', 'Aceite vegetal, botella de 1L', 35.75, 'Aceites', 50);
-
--- Inserción de datos en mi tabla Proveedor
-INSERT INTO Proveedor (Nombre, Telefono, Direccion)
-VALUES 
-('Distribuidora ABC', '1234567890', 'Calle Principal #123'),
-('Proveedor XYZ', '9876543210', 'Avenida Central #456'),
-('Suministros EFG', '2468101214', 'Boulevard Norte #789');
-
--- Insercion de datos en mi tabla Transaccion_Venta
-INSERT INTO Transaccion_Venta (Fecha, Cantidad, Precio_total, Cliente_ID)
-VALUES 
-('2024-04-24', 5, 150.75, 1),
-('2024-04-25', 3, 90.50, 2),
-('2024-04-26', 2, 60.25, 3);
-
 -- Insercion de datos en mi tabla de Transaccion_Producto
 INSERT INTO Transaccion_Producto (Transaccion_ID, Producto_ID, Cantidad)
 VALUES 
 (1, 1, 2),
-(2, 2, 1),
-(3, 3, 2);
+(2, 2, 1);
 
 -- Seleccionar todos los datos de una tabla
 SELECT * FROM Producto;
@@ -127,27 +167,27 @@ FROM Cliente
 INNER JOIN Transaccion_Venta ON Cliente.ID = Transaccion_Venta.Cliente_ID;
 
 -- Consulta con JOIN y condiciones adicionales
-SELECT e.Nombre AS empleado, d.Nombre AS departamento
+SELECT e.Nombre AS empleado, p.Nombre AS puesto
 FROM Empleado e
-JOIN Departamento d ON e.Departamento_ID = d.ID
+JOIN Puesto p ON e.Puesto_ID = p.ID
 WHERE e.Salario > 50000;
 
 -- Consulta con subconsultas correlacionadas
 SELECT e.Nombre AS empleado, e.Salario
 FROM Empleado e
 WHERE e.Salario > (
-    SELECT AVG(Salario) FROM Empleado WHERE Departamento_ID = e.Departamento_ID
+    SELECT AVG(Salario) FROM Empleado WHERE Puesto_ID = e.Puesto_ID
 );
 
 -- Consulta con funciones de agregación y GROUP BY
-SELECT Departamento_ID, AVG(Salario) AS salario_promedio
+SELECT Puesto_ID, AVG(Salario) AS salario_promedio
 FROM Empleado
-GROUP BY Departamento_ID;
+GROUP BY Puesto_ID;
 
 -- Consulta con funciones de fecha
-SELECT Nombre, Fecha_Contratacion
-FROM Empleado
-WHERE YEAR(Fecha_Contratacion) = 2023;
+SELECT Nombre, Fecha
+FROM Transaccion_Venta
+WHERE YEAR(Fecha) = 2023;
 
 -- Consulta con UNION para combinar resultados
 SELECT Nombre, 'Empleado' AS tipo
@@ -157,19 +197,23 @@ SELECT Nombre, 'Cliente' AS tipo
 FROM Cliente;
 
 -- Consulta con operadores LIKE para búsqueda de texto parcial
-SELECT Nombre, Direccion
+SELECT Nombre, Direccion_ID
 FROM Cliente
-WHERE Direccion LIKE '%Calle%';
+WHERE Direccion_ID IN (
+    SELECT ID FROM Direccion WHERE Calle LIKE '%Calle%'
+);
 
 -- Consulta con subconsultas y operadores EXISTS o NOT EXISTS
 SELECT Nombre
 FROM Producto
 WHERE EXISTS (
-    SELECT 1 FROM Transaccion_Venta WHERE Producto_ID = Producto.ID
+    SELECT 1 
+    FROM Transaccion_Producto 
+    WHERE Transaccion_Producto.Producto_ID = Producto.ID
 );
 
 -- Consulta con ordenamiento y paginación
 SELECT Nombre, Salario
 FROM Empleado
 ORDER BY Salario DESC
-OFFSET 10 ROWS FETCH NEXT 10 ROWS ONLY;
+LIMIT 10 OFFSET 10;
