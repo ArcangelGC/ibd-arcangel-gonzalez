@@ -166,28 +166,16 @@ SELECT Cliente.Nombre, Transaccion_Venta.Fecha
 FROM Cliente
 INNER JOIN Transaccion_Venta ON Cliente.ID = Transaccion_Venta.Cliente_ID;
 
--- Consulta con JOIN y condiciones adicionales
-SELECT e.Nombre AS empleado, p.Nombre AS puesto
-FROM Empleado e
-JOIN Puesto p ON e.Puesto_ID = p.ID
-WHERE e.Salario > 50000;
 
 -- Consulta con subconsultas correlacionadas
-SELECT e.Nombre AS empleado, e.Salario
-FROM Empleado e
-WHERE e.Salario > (
-    SELECT AVG(Salario) FROM Empleado WHERE Puesto_ID = e.Puesto_ID
-);
+select * from empleado;
 
--- Consulta con funciones de agregación y GROUP BY
-SELECT Puesto_ID, AVG(Salario) AS salario_promedio
-FROM Empleado
-GROUP BY Puesto_ID;
 
 -- Consulta con funciones de fecha
-SELECT Nombre, Fecha
-FROM Transaccion_Venta
-WHERE YEAR(Fecha) = 2023;
+SELECT c.Nombre, tv.Fecha
+FROM Transaccion_Venta tv
+inner join cliente c on c.`ID` = tv.`Cliente_ID`
+WHERE YEAR(tv.Fecha) = 2023;
 
 -- Consulta con UNION para combinar resultados
 SELECT Nombre, 'Empleado' AS tipo
